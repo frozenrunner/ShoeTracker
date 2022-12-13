@@ -1,14 +1,8 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue'
 import Shoe from './components/Shoe.vue'
-</script>
 
-<script>
-export default {
-  data() {
-    return {
-      shoes: [{
+const shoes = ref([{
         name: "Brooks Ghost 14",
         img: "src/assets/brooks-ghost-14-grey.jpg",
         startDate: new Date("2022-01-01 00:00:00"),
@@ -28,15 +22,23 @@ export default {
         startDate: new Date("2022-05-01 00:00:00"),
         estKm: 800,
         currentKm: 630
-      }]
-    }
-  }
+      }]);
+
+function addShoe(newShoeName, newShoeImg, newShoeStartDate, newShoeEstKm, newShoeCurrentKm) {
+  shoes.value.push({
+    name: newShoeName,
+    img: newShoeImg,
+    startDate: newShoeStartDate,
+    estKm: newShoeEstKm,
+    currentKm: newShoeCurrentKm
+  })
 }
 </script>
 
 <template>
   <main>
     <Shoe v-for="shoe in shoes" :shoe="shoe"/>
+    <button @click="addShoe('test','src/assets/brooks-launch-9-boston.webp', new Date('2022-06-01 00:00:00'), 2000, 0)">Add Shoe</button>
   </main>
 </template>
 
