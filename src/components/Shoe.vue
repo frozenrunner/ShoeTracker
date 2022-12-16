@@ -4,7 +4,7 @@ defineProps({
         type: Object,
         required: true
     }
-})
+});
 </script>
 
 <template>
@@ -16,10 +16,15 @@ defineProps({
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .img-shoe {
     width: 200px;
+
+    @media (min-width: 1024px) {
+        width: 400px;
+    }
 }
+
 .txt-start-date {
     font-weight: 700;
 }

@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import Shoe from './components/Shoe.vue'
+import AddShoe from './components/AddShoe.vue'
+let shoeAddShoe = false;
 
 const shoes = ref([{
         name: "Brooks Ghost 14",
@@ -24,13 +26,13 @@ const shoes = ref([{
         currentKm: 630
       }]);
 
-function addShoe(newShoeName, newShoeImg, newShoeStartDate, newShoeEstKm, newShoeCurrentKm) {
+function addShoe(newShoe) {
   shoes.value.push({
-    name: newShoeName,
-    img: newShoeImg,
-    startDate: newShoeStartDate,
-    estKm: newShoeEstKm,
-    currentKm: newShoeCurrentKm
+    name: newShoe.name,
+    img: newShoe.img,
+    startDate: new Date(`${newShoe.startDate} 00:00:00`),
+    estKm: newShoe.estKm,
+    currentKm: newShoe.currentKm
   })
 }
 </script>
@@ -38,13 +40,19 @@ function addShoe(newShoeName, newShoeImg, newShoeStartDate, newShoeEstKm, newSho
 <template>
   <main>
     <Shoe v-for="shoe in shoes" :shoe="shoe"/>
-    <button @click="addShoe('test','src/assets/brooks-launch-9-boston.webp', new Date('2022-06-01 00:00:00'), 2000, 0)">Add Shoe</button>
+    <AddShoe :shoes="shoes" @add-shoe="addShoe"/>
   </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
   line-height: 1.5;
+
+  .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
 }
 
 .logo {
@@ -61,12 +69,6 @@ header {
 
   .logo {
     margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 }
 </style>
