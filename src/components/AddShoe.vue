@@ -10,8 +10,6 @@ const shoe = reactive({
 });
 
 function onFileChange(e) {
-    var file = document.querySelector('input[type=file]').files[0];
-
     var files = e.target.files || e.dataTransfer.files;
     if (!files.length)
         return;
