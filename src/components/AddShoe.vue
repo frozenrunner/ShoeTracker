@@ -10,12 +10,24 @@ const shoe = reactive({
 });
 
 function onFileChange(e) {
-    var files = e.target.files || e.dataTransfer.files;
-    if (!files.length)
+    const files = e.target.files || e.dataTransfer.files;
+    if (!files.length) {
         return;
+    }
 
-    var path = files[0].name;
-    shoe.img = `src/assets/${path}`;
+    getImgBase64(files[0]);
+}
+
+function getImgBase64(file) {
+    var reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        shoe.img = reader.result;
+    };
+    reader.onerror = (error) => {
+        console.log('Error: ', error);
+    };
 }
 
 </script>

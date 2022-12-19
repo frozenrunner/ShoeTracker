@@ -47,6 +47,11 @@ function closeAddShoe() {
 </script>
 
 <template>
+  <div id="instructions" class="instructions">
+    <h1>Instructions</h1>
+    <p>Click each shoe to flip the card and see the stats!</p>
+    <p>Shoes can be added using the "Add Shoe" button</p>
+  </div>
   <div class="grid-shoe">
     <Shoe v-for="shoe in shoes" :shoe="shoe"/>
   </div>
