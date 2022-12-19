@@ -2,7 +2,8 @@
 import { ref } from 'vue'
 import Shoe from './components/Shoe.vue'
 import AddShoe from './components/AddShoe.vue'
-let shoeAddShoe = false;
+
+const showAddShoe = ref(false);
 
 const shoes = ref([{
         name: "Brooks Ghost 14",
@@ -35,40 +36,35 @@ function addShoe(newShoe) {
     currentKm: newShoe.currentKm
   })
 }
+
+function toggleAddShoe() {
+  showAddShoe.value = !showAddShoe.value;
+}
+
+function closeAddShoe() {
+  showAddShoe.value = false;
+}
 </script>
 
 <template>
-  <main>
+  <div class="grid-shoe">
     <Shoe v-for="shoe in shoes" :shoe="shoe"/>
-    <AddShoe :shoes="shoes" @add-shoe="addShoe"/>
-  </main>
+  </div>
+  <button class="button-toggle-add-shoe" @click="toggleAddShoe">Add Shoe</button>
+  <AddShoe v-show="showAddShoe" :shoes="shoes" @add-shoe="addShoe" @close-add-shoe="closeAddShoe"/>
 </template>
 
 <style lang="scss" scoped>
-header {
-  line-height: 1.5;
-
-  .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  .grid-shoe {
+    display: grid;
+    column-gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 2rem;
+    row-gap: 1rem;
   }
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  .button-toggle-add-shoe {
+    left: 0;
+    position: absolute;
+    top: 0;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-}
 </style>
