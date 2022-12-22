@@ -66,9 +66,13 @@ function closeAddShoe() {
   .grid-shoe {
     display: grid;
     column-gap: 1rem;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     padding: 0 2rem;
     row-gap: 1rem;
+
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
   .button-toggle-add-shoe {
     left: 0;
