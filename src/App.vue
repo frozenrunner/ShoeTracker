@@ -2,26 +2,29 @@
 import { ref } from 'vue'
 import Shoe from './components/Shoe.vue'
 import AddShoe from './components/AddShoe.vue'
+import brooksGhost from './assets/brooks-ghost-14-grey.jpg'
+import nikePegasus from './assets/nike-pegasus-39.jpg'
+import brooksLaunch from './assets/brooks-launch-9-boston.webp'
 
 const showAddShoe = ref(false);
 
 const shoes = ref([{
         name: "Brooks Ghost 14",
-        img: "src/assets/brooks-ghost-14-grey.jpg",
+        img: brooksGhost,
         startDate: new Date("2022-01-01 00:00:00"),
         estKm: 1000,
         currentKm: 230
       },
       {
         name: "Nike Pegasus 39",
-        img: "src/assets/nike-pegasus-39.jpg",
+        img: nikePegasus,
         startDate: new Date("2022-04-01 00:00:00"),
         estKm: 1500,
         currentKm: 130
       },
       {
         name: "Brooks Launch 9",
-        img: "src/assets/brooks-launch-9-boston.webp",
+        img: brooksLaunch,
         startDate: new Date("2022-05-01 00:00:00"),
         estKm: 800,
         currentKm: 630
