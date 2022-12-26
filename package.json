@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "bulma": "^0.9.4",
     "sass": "^1.56.2",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.45"
