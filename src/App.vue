@@ -66,15 +66,19 @@ function addShoe(newShoe) {
     img: newShoe.img,
     startDate: new Date(`${newShoe.startDate} 00:00:00`),
     estKm: newShoe.estKm,
-    currentKm: newShoe.currentKm
-  })
+    currentKm: newShoe.currentKm,
+    blurb: newShoe.blurb
+  });
+  closeAddShoe();
 }
 
 function toggleAddShoe() {
+  document.documentElement.classList.toggle("is-clipped");
   showAddShoe.value = !showAddShoe.value;
 }
 
 function closeAddShoe() {
+  document.documentElement.classList.remove("is-clipped");
   showAddShoe.value = false;
 }
 </script>

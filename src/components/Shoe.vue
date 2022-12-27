@@ -64,7 +64,12 @@ const flipped = ref(false);
         .shoe-img {
             align-self: center;
             margin: 0 0 1rem;
+            max-height: 107px;
             width: 200px;
+
+            @media (min-width: 768px) {
+                max-height: 173px;
+            }
 
             @media (min-width: 1024px) {
                 margin: 0 0 1rem;
