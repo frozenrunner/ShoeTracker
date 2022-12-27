@@ -24,7 +24,7 @@ const flipped = ref(false);
         <div class="box shoe-back">
             <h1>{{shoe.name}}</h1>
             <p><span class="txt-start-date">Start Date:</span> {{shoe.startDate.toDateString()}}</p>
-            <p>{{shoe.currentKm}}<meter min="0" :max="shoe.estKm" :value="shoe.currentKm"></meter>{{shoe.estKm}}</p>
+            <p>{{shoe.currentKm}}<progress class="progress" min="0" :max="shoe.estKm" :value="shoe.currentKm"></progress>{{shoe.estKm}}</p>
         </div>
     </div>
 </template>
@@ -32,13 +32,9 @@ const flipped = ref(false);
 <style lang="scss" scoped>
 
 .shoe {
+    grid-column: span 2;
     height: 400px;
-    max-width: 250px;
     position: relative;
-
-    @media (min-width: 1024px) {
-        max-width: none;
-    }
 
     .shoe-inner {
         display: flex;
@@ -87,9 +83,10 @@ const flipped = ref(false);
     }
 
     .shoe-back {
+        backface-visibility: hidden;
         background-color: #f2f5fb;
         background-image: linear-gradient(0deg, #f2f5fb 0%, #97D9E1 100%);
-        backface-visibility: hidden;
+        border: 1px solid var(--teal-3);
         height: 100%;
         left: 0;
         position: absolute;

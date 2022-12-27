@@ -80,33 +80,39 @@ function closeAddShoe() {
 </script>
 
 <template>
-  <div id="instructions" class="instructions">
-    <h1>Instructions</h1>
-    <p>Click each shoe to flip the card and see the stats!</p>
-    <p>Shoes can be added using the "Add Shoe" button</p>
-  </div>
-  <div class="grid-shoe">
+  <main>
+    <div id="instructions" class="instructions">
+      <h1>Instructions</h1>
+      <p>Click each shoe to flip the card and see the stats!</p>
+      <p>Shoes can be added using the "Add Shoe" button</p>
+    </div>
+    <button class="button button-toggle-add-shoe" @click="toggleAddShoe">Add Shoe</button>
     <Shoe v-for="shoe in shoes" :shoe="shoe"/>
-  </div>
-  <button class="button-toggle-add-shoe" @click="toggleAddShoe">Add Shoe</button>
-  <AddShoe v-show="showAddShoe" :shoes="shoes" @add-shoe="addShoe" @close-add-shoe="closeAddShoe"/>
+    <AddShoe :isActive="showAddShoe" :shoes="shoes" @add-shoe="addShoe" @close-add-shoe="closeAddShoe"/>
+  </main>
 </template>
 
 <style lang="scss" scoped>
-  .grid-shoe {
+  main {
     display: grid;
-    column-gap: 1rem;
-    grid-template-columns: 1fr;
-    padding: 0 2rem;
-    row-gap: 1rem;
+    grid-gap: 8px;
+    grid-template-columns: repeat(4, 1fr);
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(6, 1fr);
+    }
 
     @media (min-width: 1024px) {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(8, 1fr);
     }
   }
+
+  .instructions {
+    grid-column: 1 / -2;
+  }
+
   .button-toggle-add-shoe {
-    left: 0;
-    position: absolute;
-    top: 0;
+    align-self: center;
+    grid-column: -2 / -1;
   }
 </style>

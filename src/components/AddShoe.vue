@@ -1,6 +1,13 @@
 <script setup>
 import { reactive } from 'vue'
 
+defineProps({
+    isActive: {
+        type: Boolean,
+        required: true
+    }
+});
+
 const shoe = reactive({
     name: "",
     img: "",
@@ -33,39 +40,28 @@ function getImgBase64(file) {
 </script>
 
 <template>
-    <div class="container-form">
-        <div class="form-add-shoe">
-            <h1>Add Shoe</h1>
-            <label for="shoeName">Shoe Name</label>
-            <input id="shoeName" class="form-input" v-model="shoe.name"/>
-            <label for="file">Shoe Image</label>
-            <input type="file" accept=".png, .webp, .jpg" class="file" @change="onFileChange"/>
-            <label for="shoeStartDate">Start Date</label>
-            <input id="shoeStartDate" type="date" class="form-input" v-model="shoe.startDate"/>
-            <label for="shoeEstKm">Estimated Kilometers</label>
-            <input id="shoeEstKm" type="number" class="form-input" v-model="shoe.estKm"/>
-            <label for="shoeCurrentKm">Current Kilometers</label>
-            <input id="shoeCurrentKm" type="number" class="form-input" v-model="shoe.currentKm"/>
-            <button @click="$emit('addShoe', shoe)">Add Shoe</button>
-            <button class="dialog-close" @click="$emit('closeAddShoe')">X</button>
+        <div class="modal" :class="{'is-active': isActive }">
+            <div class="modal-background">
+                <div class="modal-content box">
+                    <h1>Add Shoe</h1>
+                    <label for="shoeName">Shoe Name</label>
+                    <input id="shoeName" class="input form-input" v-model="shoe.name" type="text"/>
+                    <label for="file">Shoe Image</label>
+                    <input accept=".png, .webp, .jpg" class="input file" type="file" @change="onFileChange"/>
+                    <label for="shoeStartDate">Start Date</label>
+                    <input id="shoeStartDate" class="input form-input" type="date" v-model="shoe.startDate"/>
+                    <label for="shoeEstKm">Estimated Kilometers</label>
+                    <input id="shoeEstKm" class="input orm-input" type="number" v-model="shoe.estKm"/>
+                    <label for="shoeCurrentKm">Current Kilometers</label>
+                    <input id="shoeCurrentKm" class="input form-input" type="number"  v-model="shoe.currentKm"/>
+                    <button class="button" @click="$emit('addShoe', shoe)">Add Shoe</button>
+                </div>
+                <button class="modal-close is-medium" @click="$emit('closeAddShoe')">X</button>
+            </div>
         </div>
-    </div>
 </template>
 
 <style lang="scss" scoped>
-.container-form {
-    align-items: center;
-    background: rgba(0,0,0,.4);
-    color: var(--color-dialog-text);
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 99;
-}
 .form-add-shoe {
     background: #fff;
     display: flex;
