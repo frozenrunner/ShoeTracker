@@ -13,8 +13,8 @@ const shoe = reactive({
     img: "",
     startDate: null,
     estKm: 0,
-    currentKm: 0,
-    blurb: ""
+    blurb: "",
+    runHistory: []
 });
 
 function onFileChange(e) {
@@ -52,8 +52,6 @@ function getImgBase64(file) {
                 <input id="shoeStartDate" class="input form-input" type="date" v-model="shoe.startDate"/>
                 <label class="label" for="shoeEstKm">Estimated Kilometers</label>
                 <input id="shoeEstKm" class="input orm-input" type="number" v-model="shoe.estKm"/>
-                <label class="label" for="shoeCurrentKm">Current Kilometers</label>
-                <input id="shoeCurrentKm" class="input form-input" type="number"  v-model="shoe.currentKm"/>
                 <label class="label" for="shoeBlurb">Blurb</label>
                 <textarea id="shoeBlurb" class="textarea" v-model="shoe.blurb"></textarea>
                 <button class="button" @click="$emit('addShoe', shoe)">Add Shoe</button>
