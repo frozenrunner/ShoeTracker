@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-defineProps({
+const props = defineProps({
     shoe: {
         type: Object,
         required: true
@@ -10,6 +10,13 @@ defineProps({
 
 const flipped = ref(false);
 
+const totalDistance = computed(() => {
+    let total = 0;
+    for (let i = 0, len = props.shoe.runHistory.length; i<len; i++) {
+        total += props.shoe.runHistory[i].distance;
+    }
+    return total;
+})
 </script>
 
 <template>
@@ -19,12 +26,13 @@ const flipped = ref(false);
                 <h2 class="content shoe-name">{{ shoe.name }}</h2>
                 <img class="shoe-img" :src="shoe.img"/>
                 <p class="content is-small shoe-blurb">{{ shoe.blurb }}</p>
+                <p><span class="txt-start-date">Start Date:</span> {{shoe.startDate.toISOString().split('T')[0]}}</p>
+                <div class="progress-container"><span>{{totalDistance}}</span><progress class="progress shoe-progress" :max="shoe.estKm" :value="totalDistance"></progress><span>{{shoe.estKm}}</span></div>
             </div>
         </div>
         <div class="box shoe-back">
-            <h1>{{shoe.name}}</h1>
-            <p><span class="txt-start-date">Start Date:</span> {{shoe.startDate.toDateString()}}</p>
-            <p>{{shoe.currentKm}}<progress class="progress" min="0" :max="shoe.estKm" :value="shoe.currentKm"></progress>{{shoe.estKm}}</p>
+            <h2 class="title is-5">History</h2>
+            <p v-for="run in shoe.runHistory"><span>{{ run.date.toISOString().split('T')[0] }}</span>:{{ run.distance }}</p>
         </div>
     </div>
 </template>
@@ -33,7 +41,6 @@ const flipped = ref(false);
 
 .shoe {
     grid-column: span 2;
-    height: 400px;
     position: relative;
 
     .shoe-inner {
@@ -101,6 +108,34 @@ const flipped = ref(false);
         transition: transform var(--card-animation-speed) ease-in;
         width: 100%;
         z-index: 9;
+    }
+
+    .progress-container {
+        align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
+
+        span {
+            &:first-child {
+                margin: 0 10px 0 0;
+            }
+
+            &:last-child {
+                margin: 0 0 0 10px;
+            }
+        }
+
+        .shoe-progress {
+            background-color: var(--teal-3);
+            display: inline;
+            margin: 0;
+            &::-moz-progress-bar {
+                background-color: var(--teal-5);
+            }
+            &::-webkit-progress-value {
+                background-color: var(--teal-5);
+            }
+        }
     }
 
     &.flipped {
