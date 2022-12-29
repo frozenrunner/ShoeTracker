@@ -129,6 +129,12 @@ const totalDistance = computed(() => {
             background-color: var(--teal-3);
             display: inline;
             margin: 0;
+            &::-moz-progress-bar {
+                background-color: var(--teal-5);
+            }
+            &::-webkit-progress-value {
+                background-color: var(--teal-5);
+            }
         }
     }
 

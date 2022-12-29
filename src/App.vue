@@ -38,7 +38,18 @@ const shoes = ref([{
         startDate: new Date("2022-04-01 00:00:00"),
         estKm: 1500,
         blurb: "The Nike Air Zoom Pegasus 39 is a comfortable, mid-range daily trainer designed to be durable.",
-        runHistory: []
+        runHistory: [{
+            date: new Date("2022-01-01 00:00:00"),
+            distance: 20
+          },
+          {
+            date: new Date("2022-01-05 00:00:00"),
+            distance: 50
+          },
+          {
+            date: new Date("2022-01-10 00:00:00"),
+            distance: 75
+          }]
       },
       {
         name: "Brooks Launch 9",
@@ -46,7 +57,18 @@ const shoes = ref([{
         startDate: new Date("2022-05-01 00:00:00"),
         estKm: 800,
         blurb: "The Brooks Launch 9 will tick most of your boxes as a good all round running shoe.",
-        runHistory: []
+        runHistory: [{
+            date: new Date("2022-01-01 00:00:00"),
+            distance: 110
+          },
+          {
+            date: new Date("2022-01-05 00:00:00"),
+            distance: 120
+          },
+          {
+            date: new Date("2022-01-10 00:00:00"),
+            distance: 125
+          }]
       },
       {
         name: "Asics Gel-DS Trainer 26",
@@ -54,7 +76,18 @@ const shoes = ref([{
         startDate: new Date("2022-06-01 00:00:00"),
         estKm: 1000,
         blurb: "The ASICS Gel-DS Trainer 26 is a top notch short-to-mid distance shoe geared toward speed,",
-        runHistory: []
+        runHistory: [{
+            date: new Date("2022-01-01 00:00:00"),
+            distance: 60
+          },
+          {
+            date: new Date("2022-01-05 00:00:00"),
+            distance: 70
+          },
+          {
+            date: new Date("2022-01-10 00:00:00"),
+            distance: 85
+          }]
       },
       {
         name: "Asics MetaSpeed Sky",
@@ -62,7 +95,18 @@ const shoes = ref([{
         startDate: new Date("2022-07-01 00:00:00"),
         estKm: 500,
         blurb: "The Asics Metaspeed Sky is a rocket. Its stiff carbon plate combined with its high toe-spring rocker results in one of the fastest-feeling super shoes that money can buy.",
-        runHistory: []
+        runHistory: [{
+            date: new Date("2022-01-01 00:00:00"),
+            distance: 10
+          },
+          {
+            date: new Date("2022-01-05 00:00:00"),
+            distance: 10
+          },
+          {
+            date: new Date("2022-01-10 00:00:00"),
+            distance: 15
+          }]
       },
       {
         name: "Asics NovaBlast 3",
@@ -70,7 +114,18 @@ const shoes = ref([{
         startDate: new Date("2022-08-01 00:00:00"),
         estKm: 1200,
         blurb: "The Novablast 3 is a very good long run shoe and just eats up miles.",
-        runHistory: []
+        runHistory: [{
+            date: new Date("2022-01-01 00:00:00"),
+            distance: 20
+          },
+          {
+            date: new Date("2022-01-05 00:00:00"),
+            distance: 20
+          },
+          {
+            date: new Date("2022-01-10 00:00:00"),
+            distance: 25
+          }]
       }]);
 
 function addShoe(newShoe) {
