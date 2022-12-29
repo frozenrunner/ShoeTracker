@@ -27,7 +27,7 @@ const totalDistance = computed(() => {
                 <img class="shoe-img" :src="shoe.img"/>
                 <p class="content is-small shoe-blurb">{{ shoe.blurb }}</p>
                 <p><span class="txt-start-date">Start Date:</span> {{shoe.startDate.toISOString().split('T')[0]}}</p>
-                <div class="progress-container"><span>{{totalDistance}}</span><progress class="progress shoe-progress" :max="shoe.estKm" :value="totalDistance"></progress><span>{{shoe.estKm}}</span></div>
+                <div class="progress-container"><span>{{totalDistance}}</span><meter class="progress shoe-progress" :max="shoe.estKm" :value="totalDistance"></meter><span>{{shoe.estKm}}</span></div>
             </div>
         </div>
         <div class="box shoe-back">
