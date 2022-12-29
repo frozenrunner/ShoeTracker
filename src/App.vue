@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Shoe from './components/Shoe.vue'
 import AddShoe from './components/AddShoe.vue'
+import AddRun from './components/AddRun.vue'
 import brooksGhost from './assets/brooks-ghost-14-grey.jpg'
 import nikePegasus from './assets/nike-pegasus-39.jpg'
 import brooksLaunch from './assets/brooks-launch-9-boston.webp'
@@ -10,6 +11,7 @@ import metaSpeed from './assets/asics-metaspeed-sky.webp'
 import novaBlast from './assets/asics-novablast-3.webp'
 
 const showAddShoe = ref(false);
+const showAddRun = ref(false);
 
 const shoes = ref([{
         name: "Brooks Ghost 14",
@@ -148,18 +150,39 @@ function closeAddShoe() {
   document.documentElement.classList.remove("is-clipped");
   showAddShoe.value = false;
 }
+
+function addRun(run) {
+  shoes.value.runHistory.push({
+    date: run.startDate,
+    distance: run.distance
+  });
+  closeAddRun();
+}
+
+function toggleAddRun(event) {
+  document.documentElement.classList.toggle("is-clipped");
+  showAddRun.value = !showAddRun.value;
+  event.stopPropagation();
+}
+
+function closeAddRun() {
+  document.documentElement.classList.remove("is-clipped");
+  showAddRun.value = false;
+}
 </script>
 
 <template>
   <main>
     <div id="instructions" class="instructions">
       <h1>Instructions</h1>
-      <p>Click each shoe to flip the card and see the stats!</p>
+      <p>Click each shoe to flip the card and see the run history</p>
       <p>Shoes can be added using the "Add Shoe" button</p>
+      <p>This is an experiment to get familiar with Vue3 after having spent many years working in Vue2</p>
     </div>
     <button class="button button-toggle-add-shoe" @click="toggleAddShoe">Add Shoe</button>
-    <Shoe v-for="shoe in shoes" :shoe="shoe"/>
-    <AddShoe :isActive="showAddShoe" :shoes="shoes" @add-shoe="addShoe" @close-add-shoe="closeAddShoe"/>
+    <Shoe v-for="shoe in shoes" :shoe="shoe" @toggle-add-run="toggleAddRun" />
+    <AddShoe :isActive="showAddShoe" @add-shoe="addShoe" @close-add-shoe="closeAddShoe" />
+    <AddRun :isActive="showAddRun" @add-run="addRun" @close-add-run="closeAddRun"/>
   </main>
 </template>
 

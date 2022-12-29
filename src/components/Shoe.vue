@@ -17,6 +17,7 @@ const totalDistance = computed(() => {
     }
     return total;
 })
+
 </script>
 
 <template>
@@ -32,7 +33,10 @@ const totalDistance = computed(() => {
         </div>
         <div class="box shoe-back">
             <h2 class="title is-5">History</h2>
-            <p v-for="run in shoe.runHistory"><span>{{ run.date.toISOString().split('T')[0] }}</span>:{{ run.distance }}</p>
+            <p class="shoe-history" v-for="run in shoe.runHistory">
+                <span>{{ run.date.toISOString().split('T')[0] }}</span>: {{ run.distance }} km
+            </p>
+            <button class="button button-toggle-add-run" @click="$emit('toggleAddRun', $event)">Add Run</button>
         </div>
     </div>
 </template>
@@ -108,6 +112,11 @@ const totalDistance = computed(() => {
         transition: transform var(--card-animation-speed) ease-in;
         width: 100%;
         z-index: 9;
+
+        .shoe-history {
+            border-bottom: 1px dashed var(--teal-3);
+            font-size: .8rem;
+        }
     }
 
     .progress-container {
