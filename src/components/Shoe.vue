@@ -16,7 +16,25 @@ const totalDistance = computed(() => {
         total += props.shoe.runHistory[i].distance;
     }
     return total;
-})
+});
+
+const sortedHistory = computed(() => {
+    const sortedRuns = props.shoe.runHistory.sort((a, b) => {
+        const dateA = a.date;
+        const dateB = b.date;
+
+        if (dateA < dateB) {
+            return -1;
+        }
+
+        if (dateA > dateB) {
+            return 1;
+        }
+
+        return 0;
+    });
+    return sortedRuns;
+});
 
 </script>
 
@@ -33,10 +51,12 @@ const totalDistance = computed(() => {
         </div>
         <div class="box shoe-back">
             <h2 class="title is-5">History</h2>
-            <p class="shoe-history" v-for="run in shoe.runHistory">
-                <span>{{ run.date.toISOString().split('T')[0] }}</span>: {{ run.distance }} km
-            </p>
-            <button class="button button-toggle-add-run" @click="$emit('toggleAddRun', $event)">Add Run</button>
+            <div class="shoe-history-container">
+                <p class="shoe-history" v-for="run in sortedHistory">
+                    <span>{{ run.date }}:</span><span class="shoe-distance">{{ run.distance }} km</span>
+                </p>
+            </div>
+            <button class="button button-toggle-add-run" @click="$emit('toggleAddRun', $event, shoe)">Add Run</button>
         </div>
     </div>
 </template>
@@ -103,6 +123,8 @@ const totalDistance = computed(() => {
         background-color: #f2f5fb;
         background-image: linear-gradient(0deg, #f2f5fb 0%, #97D9E1 100%);
         border: 1px solid var(--teal-3);
+        display: flex;
+        flex-flow: column nowrap;
         height: 100%;
         left: 0;
         position: absolute;
@@ -113,9 +135,26 @@ const totalDistance = computed(() => {
         width: 100%;
         z-index: 9;
 
-        .shoe-history {
-            border-bottom: 1px dashed var(--teal-3);
-            font-size: .8rem;
+        .shoe-history-container {
+            flex: 1 1 auto;
+            margin-bottom: .625rem;
+            overflow: auto;
+
+            .shoe-history {
+                border-bottom: 1px dashed var(--teal-3);
+                display: flex;
+                flex-flow: column nowrap;
+                font-size: .8rem;
+
+                @media (min-width: 768px) {
+                    flex-flow: row nowrap;
+                    justify-content: space-between;
+                }
+
+                .shoe-distance {
+                    margin-right: .625rem;
+                }
+            }
         }
     }
 

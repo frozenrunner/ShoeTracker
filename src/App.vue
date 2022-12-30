@@ -12,6 +12,7 @@ import novaBlast from './assets/asics-novablast-3.webp'
 
 const showAddShoe = ref(false);
 const showAddRun = ref(false);
+const activeShoe = ref(null);
 
 const shoes = ref([{
         name: "Brooks Ghost 14",
@@ -21,17 +22,65 @@ const shoes = ref([{
         blurb: "The Ghost 14 is a dependable workhorse that has the perfect balance of long-distance cushioning and ride stability. It excels on long-distances and steady-paced runs.",
         runHistory: [
           {
-            date: new Date("2022-01-01 00:00:00"),
+            date: formatDate(new Date("2022-01-01 00:00:00")),
             distance: 10
           },
           {
-            date: new Date("2022-01-05 00:00:00"),
+            date: formatDate(new Date("2022-01-05 00:00:00")),
             distance: 20
           },
           {
-            date: new Date("2022-01-10 00:00:00"),
+            date: formatDate(new Date("2022-01-10 00:00:00")),
             distance: 25
           },
+          {
+            date: formatDate(new Date("2022-02-01 00:00:00")),
+            distance: 10
+          },
+          {
+            date: formatDate(new Date("2022-02-05 00:00:00")),
+            distance: 20
+          },
+          {
+            date: formatDate(new Date("2022-02-10 00:00:00")),
+            distance: 25
+          },
+          {
+            date: formatDate(new Date("2022-03-01 00:00:00")),
+            distance: 10
+          },
+          {
+            date: formatDate(new Date("2022-03-05 00:00:00")),
+            distance: 20
+          },
+          {
+            date: formatDate(new Date("2022-03-10 00:00:00")),
+            distance: 25
+          },
+          {
+            date: formatDate(new Date("2022-04-01 00:00:00")),
+            distance: 10
+          },
+          {
+            date: formatDate(new Date("2022-04-05 00:00:00")),
+            distance: 20
+          },
+          {
+            date: formatDate(new Date("2022-04-10 00:00:00")),
+            distance: 25
+          },
+          {
+            date: formatDate(new Date("2022-05-01 00:00:00")),
+            distance: 10
+          },
+          {
+            date: formatDate(new Date("2022-05-05 00:00:00")),
+            distance: 20
+          },
+          {
+            date: formatDate(new Date("2022-05-10 00:00:00")),
+            distance: 25
+          }
         ]
       },
       {
@@ -41,15 +90,15 @@ const shoes = ref([{
         estKm: 1500,
         blurb: "The Nike Air Zoom Pegasus 39 is a comfortable, mid-range daily trainer designed to be durable.",
         runHistory: [{
-            date: new Date("2022-01-01 00:00:00"),
+            date: formatDate(new Date("2022-01-01 00:00:00")),
             distance: 20
           },
           {
-            date: new Date("2022-01-05 00:00:00"),
+            date: formatDate(new Date("2022-01-05 00:00:00")),
             distance: 50
           },
           {
-            date: new Date("2022-01-10 00:00:00"),
+            date: formatDate(new Date("2022-01-10 00:00:00")),
             distance: 75
           }]
       },
@@ -60,15 +109,15 @@ const shoes = ref([{
         estKm: 800,
         blurb: "The Brooks Launch 9 will tick most of your boxes as a good all round running shoe.",
         runHistory: [{
-            date: new Date("2022-01-01 00:00:00"),
+            date: formatDate(new Date("2022-01-01 00:00:00")),
             distance: 110
           },
           {
-            date: new Date("2022-01-05 00:00:00"),
+            date: formatDate(new Date("2022-01-05 00:00:00")),
             distance: 120
           },
           {
-            date: new Date("2022-01-10 00:00:00"),
+            date: formatDate(new Date("2022-01-10 00:00:00")),
             distance: 125
           }]
       },
@@ -79,15 +128,15 @@ const shoes = ref([{
         estKm: 1000,
         blurb: "The ASICS Gel-DS Trainer 26 is a top notch short-to-mid distance shoe geared toward speed,",
         runHistory: [{
-            date: new Date("2022-01-01 00:00:00"),
+            date: formatDate(new Date("2022-01-01 00:00:00")),
             distance: 60
           },
           {
-            date: new Date("2022-01-05 00:00:00"),
+            date: formatDate(new Date("2022-01-05 00:00:00")),
             distance: 70
           },
           {
-            date: new Date("2022-01-10 00:00:00"),
+            date: formatDate(new Date("2022-01-10 00:00:00")),
             distance: 85
           }]
       },
@@ -98,15 +147,15 @@ const shoes = ref([{
         estKm: 500,
         blurb: "The Asics Metaspeed Sky is a rocket. Its stiff carbon plate combined with its high toe-spring rocker results in one of the fastest-feeling super shoes that money can buy.",
         runHistory: [{
-            date: new Date("2022-01-01 00:00:00"),
+            date: formatDate(new Date("2022-01-01 00:00:00")),
             distance: 10
           },
           {
-            date: new Date("2022-01-05 00:00:00"),
+            date: formatDate(new Date("2022-01-05 00:00:00")),
             distance: 10
           },
           {
-            date: new Date("2022-01-10 00:00:00"),
+            date: formatDate(new Date("2022-01-10 00:00:00")),
             distance: 15
           }]
       },
@@ -117,18 +166,22 @@ const shoes = ref([{
         estKm: 1200,
         blurb: "The Novablast 3 is a very good long run shoe and just eats up miles.",
         runHistory: [{
-            date: new Date("2022-01-01 00:00:00"),
+            date: formatDate(new Date("2022-01-01 00:00:00")),
             distance: 20
           },
           {
-            date: new Date("2022-01-05 00:00:00"),
+            date: formatDate(new Date("2022-01-05 00:00:00")),
             distance: 20
           },
           {
-            date: new Date("2022-01-10 00:00:00"),
+            date: formatDate(new Date("2022-01-10 00:00:00")),
             distance: 25
           }]
       }]);
+
+function formatDate(date) {
+  return date.toISOString().split('T')[0];
+}
 
 function addShoe(newShoe) {
   shoes.value.push({
@@ -151,17 +204,18 @@ function closeAddShoe() {
   showAddShoe.value = false;
 }
 
-function addRun(run) {
-  shoes.value.runHistory.push({
+function addRun(run, shoe) {
+  shoe.runHistory.push({
     date: run.startDate,
     distance: run.distance
   });
   closeAddRun();
 }
 
-function toggleAddRun(event) {
+function toggleAddRun(event, shoe) {
   document.documentElement.classList.toggle("is-clipped");
   showAddRun.value = !showAddRun.value;
+  activeShoe.value = shoe;
   event.stopPropagation();
 }
 
@@ -182,7 +236,7 @@ function closeAddRun() {
     <button class="button button-toggle-add-shoe" @click="toggleAddShoe">Add Shoe</button>
     <Shoe v-for="shoe in shoes" :shoe="shoe" @toggle-add-run="toggleAddRun" />
     <AddShoe :isActive="showAddShoe" @add-shoe="addShoe" @close-add-shoe="closeAddShoe" />
-    <AddRun :isActive="showAddRun" @add-run="addRun" @close-add-run="closeAddRun"/>
+    <AddRun :isActive="showAddRun" :activeShoe="activeShoe" @add-run="addRun" @close-add-run="closeAddRun"/>
   </main>
 </template>
 
@@ -190,7 +244,7 @@ function closeAddRun() {
   main {
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
 
     @media (min-width: 768px) {
       grid-template-columns: repeat(6, 1fr);

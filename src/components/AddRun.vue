@@ -1,17 +1,29 @@
 <script setup>
 import { reactive } from 'vue'
 
-defineProps({
+const props = defineProps({
     isActive: {
         type: Boolean,
         required: true
+    },
+    activeShoe: {
+        type: Object,
+        required: true
     }
 });
+
+const emit = defineEmits(['addRun']);
 
 const run = reactive({
     startDate: null,
     distance: 0
 });
+
+function emitAddRun() {
+    emit('addRun', run, props.activeShoe)
+    run.startDate = null;
+    run.distance = 0;
+}
 
 </script>
 
@@ -22,8 +34,8 @@ const run = reactive({
                 <label class="label" for="shoeName">Distance</label>
                 <input id="shoeName" class="input form-input" v-model="run.distance" type="number"/>
                 <label class="label" for="shoeRunDate">Run Date</label>
-                <input id="shoeRunDate" class="input form-input" type="date" v-model="run.startDate"/>
-                <button class="button" @click="$emit('addRun', run)">Add Run</button>
+                <input id="shoeRunDate" class="input form-input shoe-run-date" type="date" v-model="run.startDate"/>
+                <button class="button" @click="emitAddRun">Add Run</button>
             </div>
             <button class="modal-close is-medium" @click="$emit('closeAddRun')">X</button>
         </div>
@@ -42,9 +54,14 @@ const run = reactive({
     position: fixed;
 }
 
+.input:last-of-type {
+    margin-bottom: .625rem;
+}
+
 .dialog-close {
     position: absolute;
     right: 10px;
     top: 10px;    
 }
+
 </style>
