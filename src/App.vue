@@ -232,6 +232,7 @@ function closeAddRun() {
       <p>Click each shoe to flip the card and see the run history</p>
       <p>Shoes can be added using the "Add Shoe" button</p>
       <p>This is an experiment to get familiar with Vue3 after having spent many years working in Vue2</p>
+      <p>Full code available at: <a href="https://github.com/frozenrunner/ShoeTracker">ShoeTracker GitHub Repository</a></p>
     </div>
     <button class="button button-toggle-add-shoe" @click="toggleAddShoe">Add Shoe</button>
     <Shoe v-for="shoe in shoes" :shoe="shoe" @toggle-add-run="toggleAddRun" />
